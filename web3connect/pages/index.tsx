@@ -2,8 +2,20 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
+import { useAccount } from 'wagmi';
+import { useBalance } from 'wagmi'
+
 
 const Home: NextPage = () => {
+  const { address, isConnecting, isDisconnected } = useAccount()
+  console.log(address);
+  const { data, isError, isLoading } = useBalance({
+    address
+  })
+ 
+  if (isLoading) return <div>Fetching balance…</div>
+  if (isError) return <div>Error fetching balance</div>
+console.log(data);
   return (
     <div className={styles.container}>
       <Head>

@@ -1,9 +1,9 @@
 import '../styles/globals.css';
 import '@rainbow-me/rainbowkit/styles.css';
-import { getDefaultWallets, RainbowKitProvider, DisclaimerComponent, midnightTheme} from '@rainbow-me/rainbowkit';
+import { getDefaultWallets, RainbowKitProvider, DisclaimerComponent, midnightTheme } from '@rainbow-me/rainbowkit';
 import type { AppProps } from 'next/app';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
-import { arbitrum, goerli, mainnet, optimism, polygon } from 'wagmi/chains';
+import { arbitrum, goerli, mainnet, optimism, polygon, sepolia } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
 import { connectorsForWallets } from '@rainbow-me/rainbowkit';
 import {
@@ -26,6 +26,7 @@ const Disclaimer: DisclaimerComponent = ({ Text, Link }) => (
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
+    sepolia,
     mainnet,
     polygon,
     optimism,
@@ -70,7 +71,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         appName: 'web3connect',
         disclaimer: Disclaimer,
       }}
-      theme={midnightTheme()}
+        theme={midnightTheme()}
       >
         <Component {...pageProps} />
       </RainbowKitProvider>
